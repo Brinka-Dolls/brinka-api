@@ -11,11 +11,16 @@ import org.brinka.brinkaapi.domain.model.Payment;
 import org.brinka.brinkaapi.domain.model.Product;
 import org.brinka.brinkaapi.domain.model.Review;
 import org.brinka.brinkaapi.domain.model.User;
-import org.brinka.brinkaapi.entrypoint.dto.response.*;
 import org.brinka.brinkaapi.entrypoint.dto.response.AddressResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.CardResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.CartItemResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.CartResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.OrderItemResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.OrderPaymentResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.OrderResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.ProductResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.ReviewResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

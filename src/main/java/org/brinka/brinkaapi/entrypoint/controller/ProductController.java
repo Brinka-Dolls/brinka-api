@@ -4,7 +4,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.brinka.brinkaapi.application.usecase.product.*;
+import org.brinka.brinkaapi.application.usecase.product.AddProductUseCase;
+import org.brinka.brinkaapi.application.usecase.product.AddProductsUseCase;
+import org.brinka.brinkaapi.application.usecase.product.DeleteProductByIdUseCase;
+import org.brinka.brinkaapi.application.usecase.product.DeleteProductsByIdUseCase;
+import org.brinka.brinkaapi.application.usecase.product.GetAllProductsUseCase;
+import org.brinka.brinkaapi.application.usecase.product.GetProductByIdUseCase;
+import org.brinka.brinkaapi.application.usecase.product.UpdateProductUseCase;
 import org.brinka.brinkaapi.entrypoint.dto.request.PatchProductRequest;
 import org.brinka.brinkaapi.entrypoint.dto.request.ProductRequest;
 import org.brinka.brinkaapi.entrypoint.dto.response.ProductResponse;
@@ -12,7 +18,15 @@ import org.brinka.brinkaapi.entrypoint.mapper.RequestMapper;
 import org.brinka.brinkaapi.entrypoint.mapper.ResponseMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/products")

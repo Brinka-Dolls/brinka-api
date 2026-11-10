@@ -23,10 +23,18 @@ public class UpdateCardUseCase {
             .findCardByUser(user)
             .orElseThrow(() -> new CardNotFoundException(user.getEmail()));
 
-    if (cardInput.cvc() != null) card.setCvc(cardInput.cvc());
-    if (cardInput.dataValidade() != null) card.setDataValidade(cardInput.dataValidade());
-    if (cardInput.nomeTitular() != null) card.setNomeTitular(cardInput.nomeTitular());
-    if (cardInput.numeroCartao() != null) card.setNumeroCartao(cardInput.numeroCartao());
+    if (cardInput.cvc() != null) {
+      card.setCvc(cardInput.cvc());
+    }
+    if (cardInput.dataValidade() != null) {
+      card.setDataValidade(cardInput.dataValidade());
+    }
+    if (cardInput.nomeTitular() != null) {
+      card.setNomeTitular(cardInput.nomeTitular());
+    }
+    if (cardInput.numeroCartao() != null) {
+      card.setNumeroCartao(cardInput.numeroCartao());
+    }
 
     return repository.saveCard(card);
   }
