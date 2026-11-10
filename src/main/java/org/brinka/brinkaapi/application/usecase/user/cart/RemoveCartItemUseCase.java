@@ -9,16 +9,16 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class RemoveCartItemUseCase {
-    private final CartRepository repository;
-    private final UserRepository userRepository;
-    public void execute(Integer productId, String email) {
-        var user = userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
+  private final CartRepository repository;
+  private final UserRepository userRepository;
 
-        var cart = repository.getCartByUserId(user.getId());
+  public void execute(Integer productId, String email) {
+    var user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        cart.removeItem(productId);
+    var cart = repository.getCartByUserId(user.getId());
 
-        repository.saveCart(cart);
-    }
+    cart.removeItem(productId);
+
+    repository.saveCart(cart);
+  }
 }

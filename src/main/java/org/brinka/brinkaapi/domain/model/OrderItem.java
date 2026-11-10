@@ -1,13 +1,12 @@
 package org.brinka.brinkaapi.domain.model;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
-
-import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,12 +15,12 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 public class OrderItem {
-    private Integer id;
-    private Product produto;
-    private Integer quantidade;
-    private BigDecimal precoUnitario;
+  private Integer id;
+  private Product produto;
+  private Integer quantidade;
+  private BigDecimal precoUnitario;
 
-    public BigDecimal getSubtotal() {
-        return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
-    }
+  public BigDecimal getSubtotal() {
+    return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+  }
 }

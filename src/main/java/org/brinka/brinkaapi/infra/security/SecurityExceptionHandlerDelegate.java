@@ -11,23 +11,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Component
-public class SecurityExceptionHandlerDelegate implements AuthenticationEntryPoint, AccessDeniedHandler {
-    @Qualifier("handlerExceptionResolver")
-    private final HandlerExceptionResolver resolver;
+public class SecurityExceptionHandlerDelegate
+    implements AuthenticationEntryPoint, AccessDeniedHandler {
+  @Qualifier("handlerExceptionResolver")
+  private final HandlerExceptionResolver resolver;
 
-    public SecurityExceptionHandlerDelegate(
-            @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver) {
-        this.resolver = resolver;
-    }
+  public SecurityExceptionHandlerDelegate(
+      @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver) {
+    this.resolver = resolver;
+  }
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex) {
-        resolver.resolveException(request, response, null, ex);
+  @Override
+  public void commence(
+      HttpServletRequest request, HttpServletResponse response, AuthenticationException ex) {
+    resolver.resolveException(request, response, null, ex);
+  }
 
-    }
-
-    @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex) {
-        resolver.resolveException(request, response, null, ex);
-    }
+  @Override
+  public void handle(
+      HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex) {
+    resolver.resolveException(request, response, null, ex);
+  }
 }

@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "4.1.0"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.diffplug.spotless") version "8.11.0"
 }
 
 group = "org.brinka"
@@ -45,4 +46,14 @@ tasks.withType<Test> {
 
 tasks.named("jar") {
     enabled=false
+}
+
+spotless {
+    java {
+        target("src/**/*.java")
+        googleJavaFormat()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }

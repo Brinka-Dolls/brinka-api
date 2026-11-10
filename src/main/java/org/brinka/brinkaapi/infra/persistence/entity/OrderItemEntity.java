@@ -1,12 +1,11 @@
 package org.brinka.brinkaapi.infra.persistence.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -15,20 +14,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "tbl_item_pedido")
 public class OrderItemEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pedido")
-    private OrderEntity pedido;
+  @ManyToOne
+  @JoinColumn(name = "id_pedido")
+  private OrderEntity pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_boneco")
-    private ProductEntity boneco;
+  @ManyToOne
+  @JoinColumn(name = "id_boneco")
+  private ProductEntity boneco;
 
-    private Integer quantidade;
+  private Integer quantidade;
 
-    @Column(name = "preco_unitario")
-    private BigDecimal precoUnitario;
+  @Column(name = "preco_unitario")
+  private BigDecimal precoUnitario;
 }

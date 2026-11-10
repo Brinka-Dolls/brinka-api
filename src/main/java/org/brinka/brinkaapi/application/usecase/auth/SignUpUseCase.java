@@ -13,33 +13,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @UseCase
 @RequiredArgsConstructor
 public class SignUpUseCase {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final TokenService tokenService;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final TokenService tokenService;
 
-    public String execute(SignUpUseCaseInput signUpUseCaseInput) {
-        if (userRepository.findUserByEmail(signUpUseCaseInput.email()).isPresent())
-            throw new EmailAlreadyExistsException(signUpUseCaseInput.email());
+  public String execute(SignUpUseCaseInput signUpUseCaseInput) {
+    if (userRepository.findUserByEmail(signUpUseCaseInput.email()).isPresent())
+      throw new EmailAlreadyExistsException(signUpUseCaseInput.email());
 
-        String hashedPassword = passwordEncoder.encode(signUpUseCaseInput.senha());
-        User user = User.builder()
-                .nome(signUpUseCaseInput.nome())
-                .email(signUpUseCaseInput.email())
-                .telefone(signUpUseCaseInput.telefone())
-                .senha(hashedPassword)
-                .ehAdmin(false)
-                .address(Address.builder()
-                        .cep(signUpUseCaseInput.address().cep().replace("-", ""))
-                        .rua(signUpUseCaseInput.address().rua())
-                        .numero(signUpUseCaseInput.address().numero())
-                        .complemento(signUpUseCaseInput.address().complemento())
-                        .cidade(signUpUseCaseInput.address().cidade())
-                        .estado(signUpUseCaseInput.address().estado())
-                        .build())
-                .build();
+    String hashedPassword = passwordEncoder.encode(signUpUseCaseInput.senha());
+    User user =
+        User.builder()
+            .nome(signUpUseCaseInput.nome())
+            .email(signUpUseCaseInput.email())
+            .telefone(signUpUseCaseInput.telefone())
+            .senha(hashedPassword)
+            .ehAdmin(false)
+            .address(
+                Address.builder()
+                    .cep(signUpUseCaseInput.address().cep().replace("-", ""))
+                    .rua(signUpUseCaseInput.address().rua())
+                    .numero(signUpUseCaseInput.address().numero())
+                    .complemento(signUpUseCaseInput.address().complemento())
+                    .cidade(signUpUseCaseInput.address().cidade())
+                    .estado(signUpUseCaseInput.address().estado())
+                    .build())
+            .build();
 
-        userRepository.saveUser(user);
+    userRepository.saveUser(user);
 
-        return tokenService.generateToken(user);
-    }
+    return tokenService.generateToken(user);
+  }
 }

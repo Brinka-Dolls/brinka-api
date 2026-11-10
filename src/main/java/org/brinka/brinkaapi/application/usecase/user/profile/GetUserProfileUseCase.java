@@ -9,10 +9,9 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class GetUserProfileUseCase {
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public User execute(String email) {
-        return userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
-    }
+  public User execute(String email) {
+    return userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+  }
 }

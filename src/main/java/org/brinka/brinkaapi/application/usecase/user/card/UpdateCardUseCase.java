@@ -12,25 +12,22 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class UpdateCardUseCase {
-    private final CardRepository repository;
-    private final UserRepository userRepository;
+  private final CardRepository repository;
+  private final UserRepository userRepository;
 
-    public Card execute(CardInput cardInput, String email) {
-        var user = userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
+  public Card execute(CardInput cardInput, String email) {
+    var user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        var card = repository.findCardByUser(user)
-                .orElseThrow(() -> new CardNotFoundException(user.getEmail()));
+    var card =
+        repository
+            .findCardByUser(user)
+            .orElseThrow(() -> new CardNotFoundException(user.getEmail()));
 
-        if (cardInput.cvc() != null)
-            card.setCvc(cardInput.cvc());
-        if (cardInput.dataValidade() != null)
-            card.setDataValidade(cardInput.dataValidade());
-        if (cardInput.nomeTitular() != null)
-            card.setNomeTitular(cardInput.nomeTitular());
-        if (cardInput.numeroCartao() != null)
-            card.setNumeroCartao(cardInput.numeroCartao());
+    if (cardInput.cvc() != null) card.setCvc(cardInput.cvc());
+    if (cardInput.dataValidade() != null) card.setDataValidade(cardInput.dataValidade());
+    if (cardInput.nomeTitular() != null) card.setNomeTitular(cardInput.nomeTitular());
+    if (cardInput.numeroCartao() != null) card.setNumeroCartao(cardInput.numeroCartao());
 
-        return repository.saveCard(card);
-    }
+    return repository.saveCard(card);
+  }
 }

@@ -1,12 +1,11 @@
 package org.brinka.brinkaapi.infra.persistence.entity;
 
 import jakarta.persistence.*;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Entity
 @Getter
@@ -15,16 +14,19 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "tbl_avaliacao")
 public class ReviewEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_boneco")
-    private ProductEntity produto;
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private UserEntity usuario;
-    private String comentario;
-    private Integer nota;
-    private Date data;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+
+  @ManyToOne
+  @JoinColumn(name = "id_boneco")
+  private ProductEntity produto;
+
+  @ManyToOne
+  @JoinColumn(name = "id_usuario")
+  private UserEntity usuario;
+
+  private String comentario;
+  private Integer nota;
+  private Date data;
 }

@@ -3,11 +3,9 @@ package org.brinka.brinkaapi.application.dto.input;
 import java.math.BigDecimal;
 
 public record AddProductUseCaseInput(
-        String imagem,
-        String nome,
-        Integer categoriaId,
-        String descricao,
-        BigDecimal preco,
-        Integer estoque
-) {
-}
+    String imagem,
+    String nome,
+    Integer categoriaId,
+    String descricao,
+    BigDecimal preco,
+    Integer estoque) {}

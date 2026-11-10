@@ -1,6 +1,8 @@
 package org.brinka.brinkaapi.infra.persistence.entity;
 
 import jakarta.persistence.*;
+import java.util.Collection;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -20,56 +19,59 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "tbl_usuario")
 public class UserEntity implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nome;
-    private String email;
-    private String telefone;
-    private String senha;
-    private Boolean ehAdmin;
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private AddressEntity address;
-    @OneToMany(mappedBy = "usuario")
-    private List<ReviewEntity> avaliacoes;
-    @OneToOne(mappedBy = "usuario")
-    private CardEntity cartao;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return ehAdmin ?
-                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
-                :
-                List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+  private String nome;
+  private String email;
+  private String telefone;
+  private String senha;
+  private Boolean ehAdmin;
 
-    @Override
-    public @Nullable String getPassword() {
-        return senha;
-    }
+  @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+  private AddressEntity address;
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
+  @OneToMany(mappedBy = "usuario")
+  private List<ReviewEntity> avaliacoes;
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  @OneToOne(mappedBy = "usuario")
+  private CardEntity cartao;
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return ehAdmin
+        ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
+        : List.of(new SimpleGrantedAuthority("ROLE_USER"));
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Override
+  public @Nullable String getPassword() {
+    return senha;
+  }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public String getUsername() {
+    return email;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 }

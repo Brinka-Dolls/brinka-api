@@ -2,6 +2,8 @@ package org.brinka.brinkaapi.entrypoint.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.brinka.brinkaapi.application.usecase.user.address.GetAddressUseCase;
+import org.brinka.brinkaapi.application.usecase.user.address.UpdateAddressUseCase;
 import org.brinka.brinkaapi.application.usecase.user.card.AddCardUseCase;
 import org.brinka.brinkaapi.application.usecase.user.card.GetCardUseCase;
 import org.brinka.brinkaapi.application.usecase.user.card.UpdateCardUseCase;
@@ -9,17 +11,15 @@ import org.brinka.brinkaapi.application.usecase.user.cart.AddCartItemUseCase;
 import org.brinka.brinkaapi.application.usecase.user.cart.GetCartUseCase;
 import org.brinka.brinkaapi.application.usecase.user.cart.RemoveCartItemUseCase;
 import org.brinka.brinkaapi.application.usecase.user.cart.UpdateCartItemUseCase;
-import org.brinka.brinkaapi.application.usecase.user.address.GetAddressUseCase;
-import org.brinka.brinkaapi.application.usecase.user.address.UpdateAddressUseCase;
 import org.brinka.brinkaapi.application.usecase.user.profile.GetUserProfileUseCase;
 import org.brinka.brinkaapi.application.usecase.user.profile.UpdateUserProfileUseCase;
 import org.brinka.brinkaapi.domain.enums.CartOperation;
 import org.brinka.brinkaapi.entrypoint.dto.request.AddCardRequest;
-import org.brinka.brinkaapi.entrypoint.dto.request.UpdateCardRequest;
 import org.brinka.brinkaapi.entrypoint.dto.request.UpdateAddressRequest;
+import org.brinka.brinkaapi.entrypoint.dto.request.UpdateCardRequest;
 import org.brinka.brinkaapi.entrypoint.dto.request.UpdateUserRequest;
-import org.brinka.brinkaapi.entrypoint.dto.response.CardResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.AddressResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.CardResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.CartResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.UserResponse;
 import org.brinka.brinkaapi.entrypoint.mapper.RequestMapper;
@@ -33,96 +33,116 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/usuarios")
 public class UserController {
-    private final RequestMapper requestMapper;
-    private final ResponseMapper responseMapper;
-    private final AddCardUseCase addCardUseCase;
-    private final UpdateCardUseCase updateCardUseCase;
-    private final GetCardUseCase getCardUseCase;
-    private final GetAddressUseCase getAddressUseCase;
-    private final UpdateAddressUseCase updateAddressUseCase;
-    private final AddCartItemUseCase addCartItemUseCase;
-    private final GetCartUseCase getCartUseCase;
-    private final RemoveCartItemUseCase removeCartItemUseCase;
-    private final UpdateCartItemUseCase updateCartItemUseCase;
-    private final GetUserProfileUseCase getUserProfileUseCase;
-    private final UpdateUserProfileUseCase updateUserProfileUseCase;
+  private final RequestMapper requestMapper;
+  private final ResponseMapper responseMapper;
+  private final AddCardUseCase addCardUseCase;
+  private final UpdateCardUseCase updateCardUseCase;
+  private final GetCardUseCase getCardUseCase;
+  private final GetAddressUseCase getAddressUseCase;
+  private final UpdateAddressUseCase updateAddressUseCase;
+  private final AddCartItemUseCase addCartItemUseCase;
+  private final GetCartUseCase getCartUseCase;
+  private final RemoveCartItemUseCase removeCartItemUseCase;
+  private final UpdateCartItemUseCase updateCartItemUseCase;
+  private final GetUserProfileUseCase getUserProfileUseCase;
+  private final UpdateUserProfileUseCase updateUserProfileUseCase;
 
-    @GetMapping
-    public ResponseEntity<UserResponse> getProfile(Authentication authentication) {
-        String email = authentication.getName();
+  @GetMapping
+  public ResponseEntity<UserResponse> getProfile(Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(getUserProfileUseCase.execute(email)));
-    }
+    return ResponseEntity.ok(responseMapper.toResponse(getUserProfileUseCase.execute(email)));
+  }
 
-    @PatchMapping
-    public ResponseEntity<UserResponse> updateProfile(@RequestBody @Valid UpdateUserRequest request, Authentication authentication) {
-        String email = authentication.getName();
+  @PatchMapping
+  public ResponseEntity<UserResponse> updateProfile(
+      @RequestBody @Valid UpdateUserRequest request, Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(updateUserProfileUseCase.execute(requestMapper.toInput(request), email)));
-    }
+    return ResponseEntity.ok(
+        responseMapper.toResponse(
+            updateUserProfileUseCase.execute(requestMapper.toInput(request), email)));
+  }
 
-    @GetMapping("/cartao")
-    public ResponseEntity<CardResponse> getCard(Authentication authentication) {
-        String email = authentication.getName();
+  @GetMapping("/cartao")
+  public ResponseEntity<CardResponse> getCard(Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(getCardUseCase.execute(email)));
-    }
+    return ResponseEntity.ok(responseMapper.toResponse(getCardUseCase.execute(email)));
+  }
 
-    @PostMapping("/cartao")
-    public ResponseEntity<CardResponse> addCard(@RequestBody @Valid AddCardRequest request, Authentication authentication) {
-        String email = authentication.getName();
+  @PostMapping("/cartao")
+  public ResponseEntity<CardResponse> addCard(
+      @RequestBody @Valid AddCardRequest request, Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMapper.toResponse(addCardUseCase.execute(requestMapper.toInput(request), email)));
-    }
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(
+            responseMapper.toResponse(
+                addCardUseCase.execute(requestMapper.toInput(request), email)));
+  }
 
-    @PatchMapping("/cartao")
-    public ResponseEntity<CardResponse> updateCard(@RequestBody @Valid UpdateCardRequest request, Authentication authentication) {
-        String email = authentication.getName();
+  @PatchMapping("/cartao")
+  public ResponseEntity<CardResponse> updateCard(
+      @RequestBody @Valid UpdateCardRequest request, Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(updateCardUseCase.execute(requestMapper.toInput(request), email)));
-    }
+    return ResponseEntity.ok(
+        responseMapper.toResponse(
+            updateCardUseCase.execute(requestMapper.toInput(request), email)));
+  }
 
-    @GetMapping("/address")
-    public ResponseEntity<AddressResponse> getAddress(Authentication authentication) {
-        String email = authentication.getName();
+  @GetMapping("/address")
+  public ResponseEntity<AddressResponse> getAddress(Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(getAddressUseCase.execute(email)));
-    }
+    return ResponseEntity.ok(responseMapper.toResponse(getAddressUseCase.execute(email)));
+  }
 
-    @PatchMapping("/address")
-    public ResponseEntity<AddressResponse> updateAddress(@RequestBody @Valid UpdateAddressRequest request, Authentication authentication) {
-        String email = authentication.getName();
+  @PatchMapping("/address")
+  public ResponseEntity<AddressResponse> updateAddress(
+      @RequestBody @Valid UpdateAddressRequest request, Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(updateAddressUseCase.execute(requestMapper.toInput(request), email)));
-    }
+    return ResponseEntity.ok(
+        responseMapper.toResponse(
+            updateAddressUseCase.execute(requestMapper.toInput(request), email)));
+  }
 
-    @GetMapping("/carrinho")
-    public ResponseEntity<CartResponse> getCart(Authentication authentication) {
-        String email = authentication.getName();
+  @GetMapping("/carrinho")
+  public ResponseEntity<CartResponse> getCart(Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(getCartUseCase.execute(email)));
-    }
+    return ResponseEntity.ok(responseMapper.toResponse(getCartUseCase.execute(email)));
+  }
 
-    @PostMapping("/carrinho")
-    public ResponseEntity<CartResponse> addCartItem(@RequestParam Integer productId, Authentication authentication) {
-        String email = authentication.getName();
+  @PostMapping("/carrinho")
+  public ResponseEntity<CartResponse> addCartItem(
+      @RequestParam Integer productId, Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(addCartItemUseCase.execute(productId, email)));
-    }
+    return ResponseEntity.ok(
+        responseMapper.toResponse(addCartItemUseCase.execute(productId, email)));
+  }
 
-    @PatchMapping("/carrinho/{productId}")
-    public ResponseEntity<CartResponse> updateCartItem(@RequestParam CartOperation operation, @PathVariable Integer productId, Authentication authentication) {
-        String email = authentication.getName();
+  @PatchMapping("/carrinho/{productId}")
+  public ResponseEntity<CartResponse> updateCartItem(
+      @RequestParam CartOperation operation,
+      @PathVariable Integer productId,
+      Authentication authentication) {
+    String email = authentication.getName();
 
-        return ResponseEntity.ok(responseMapper.toResponse(updateCartItemUseCase.execute(productId, operation, email)));
-    }
+    return ResponseEntity.ok(
+        responseMapper.toResponse(updateCartItemUseCase.execute(productId, operation, email)));
+  }
 
-    @DeleteMapping("/carrinho/{productId}")
-    public ResponseEntity<Void> removeCartItem(@PathVariable Integer productId, Authentication authentication) {
-        String email = authentication.getName();
+  @DeleteMapping("/carrinho/{productId}")
+  public ResponseEntity<Void> removeCartItem(
+      @PathVariable Integer productId, Authentication authentication) {
+    String email = authentication.getName();
 
-        removeCartItemUseCase.execute(productId, email);
+    removeCartItemUseCase.execute(productId, email);
 
-        return ResponseEntity.noContent().build();
-    }
+    return ResponseEntity.noContent().build();
+  }
 }

@@ -2,10 +2,10 @@ package org.brinka.brinkaapi.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +14,12 @@ import lombok.EqualsAndHashCode;
 @Setter
 @Builder
 public class Address {
-    private Integer id;
-    private Integer idUsuario;
-    private String cep;
-    private String rua;
-    private Integer numero;
-    private String complemento;
-    private String cidade;
-    private String estado;
+  private Integer id;
+  private Integer idUsuario;
+  private String cep;
+  private String rua;
+  private Integer numero;
+  private String complemento;
+  private String cidade;
+  private String estado;
 }

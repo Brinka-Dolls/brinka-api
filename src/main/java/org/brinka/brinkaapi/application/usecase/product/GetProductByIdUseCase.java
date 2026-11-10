@@ -9,14 +9,16 @@ import org.brinka.brinkaapi.domain.repository.ProductRepository;
 @UseCase
 @RequiredArgsConstructor
 public class GetProductByIdUseCase {
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-    public Product execute(Integer id, Boolean avaliacoes) {
-        if (Boolean.TRUE.equals(avaliacoes))
-            return productRepository.findProductByIdWithAvaliacoes(id)
-                    .orElseThrow(() -> new ProductNotFoundException(id));
-        else
-            return productRepository.findProductById(id)
-                    .orElseThrow(() -> new ProductNotFoundException(id));
-    }
+  public Product execute(Integer id, Boolean avaliacoes) {
+    if (Boolean.TRUE.equals(avaliacoes))
+      return productRepository
+          .findProductByIdWithAvaliacoes(id)
+          .orElseThrow(() -> new ProductNotFoundException(id));
+    else
+      return productRepository
+          .findProductById(id)
+          .orElseThrow(() -> new ProductNotFoundException(id));
+  }
 }

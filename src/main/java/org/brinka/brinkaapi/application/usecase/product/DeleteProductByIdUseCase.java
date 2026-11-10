@@ -8,12 +8,11 @@ import org.brinka.brinkaapi.domain.repository.ProductRepository;
 @UseCase
 @RequiredArgsConstructor
 public class DeleteProductByIdUseCase {
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-    public void execute(Integer id) {
-        productRepository.findProductById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+  public void execute(Integer id) {
+    productRepository.findProductById(id).orElseThrow(() -> new ProductNotFoundException(id));
 
-        productRepository.deleteProductById(id);
-    }
+    productRepository.deleteProductById(id);
+  }
 }
