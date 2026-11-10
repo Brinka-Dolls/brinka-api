@@ -24,6 +24,9 @@ public class UpdateCartItemUseCase {
     switch (operation) {
       case ADD -> cart.incrementItem(productId);
       case REMOVE -> cart.decrementItem(productId);
+      default -> {
+        // nenhuma operacao
+      }
     }
 
     return cartOutputService.buildOutput(repository.saveCart(cart));

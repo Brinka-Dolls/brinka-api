@@ -1,7 +1,16 @@
 package org.brinka.brinkaapi.entrypoint.exception;
 
 import java.util.stream.Collectors;
-import org.brinka.brinkaapi.domain.exception.*;
+import org.brinka.brinkaapi.domain.exception.AddressNotFoundException;
+import org.brinka.brinkaapi.domain.exception.CardNotFoundException;
+import org.brinka.brinkaapi.domain.exception.CartItemNotFoundException;
+import org.brinka.brinkaapi.domain.exception.CategoryNotFoundException;
+import org.brinka.brinkaapi.domain.exception.EmailAlreadyExistsException;
+import org.brinka.brinkaapi.domain.exception.EmptyCartException;
+import org.brinka.brinkaapi.domain.exception.InsufficientStockException;
+import org.brinka.brinkaapi.domain.exception.OrderNotFoundException;
+import org.brinka.brinkaapi.domain.exception.ProductNotFoundException;
+import org.brinka.brinkaapi.domain.exception.UserNotFoundException;
 import org.brinka.brinkaapi.entrypoint.dto.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

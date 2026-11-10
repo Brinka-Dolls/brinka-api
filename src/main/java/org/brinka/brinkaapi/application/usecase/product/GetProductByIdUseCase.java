@@ -12,13 +12,14 @@ public class GetProductByIdUseCase {
   private final ProductRepository productRepository;
 
   public Product execute(Integer id, Boolean avaliacoes) {
-    if (Boolean.TRUE.equals(avaliacoes))
+    if (Boolean.TRUE.equals(avaliacoes)) {
       return productRepository
           .findProductByIdWithAvaliacoes(id)
           .orElseThrow(() -> new ProductNotFoundException(id));
-    else
+    } else {
       return productRepository
           .findProductById(id)
           .orElseThrow(() -> new ProductNotFoundException(id));
+    }
   }
 }

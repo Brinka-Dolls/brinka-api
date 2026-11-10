@@ -23,12 +23,24 @@ public class UpdateAddressUseCase {
             .findAddressByUser(user)
             .orElseThrow(() -> new AddressNotFoundException(user.getEmail()));
 
-    if (input.cep() != null) address.setCep(input.cep());
-    if (input.cidade() != null) address.setCidade(input.cidade());
-    if (input.complemento() != null) address.setComplemento(input.complemento());
-    if (input.estado() != null) address.setEstado(input.estado());
-    if (input.numero() != null) address.setNumero(input.numero());
-    if (input.rua() != null) address.setRua(input.rua());
+    if (input.cep() != null) {
+      address.setCep(input.cep());
+    }
+    if (input.cidade() != null) {
+      address.setCidade(input.cidade());
+    }
+    if (input.complemento() != null) {
+      address.setComplemento(input.complemento());
+    }
+    if (input.estado() != null) {
+      address.setEstado(input.estado());
+    }
+    if (input.numero() != null) {
+      address.setNumero(input.numero());
+    }
+    if (input.rua() != null) {
+      address.setRua(input.rua());
+    }
 
     address.setIdUsuario(user.getId());
 

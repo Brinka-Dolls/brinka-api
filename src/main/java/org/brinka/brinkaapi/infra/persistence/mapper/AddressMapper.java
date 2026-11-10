@@ -17,7 +17,9 @@ public interface AddressMapper {
 
   @Named("idToUserEntityId")
   default UserEntity idToUserEntityId(Integer idUsuario) {
-    if (idUsuario == null) return null;
+    if (idUsuario == null) {
+      return null;
+    }
     UserEntity ref = new UserEntity();
     ref.setId(idUsuario);
     return ref;
