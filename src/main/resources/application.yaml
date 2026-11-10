@@ -30,3 +30,8 @@ correios:
 app:
   cors:
     allowed-origins: https://brinka-frontend.onrender.com
+  db-bootstrap:
+    enabled: true
+    load-data: true
+    schema-url: https://raw.githubusercontent.com/Brinka-Dolls/brinka-database/main/script.sql
+    data-url: https://raw.githubusercontent.com/Brinka-Dolls/brinka-database/main/script-dataload.sql
