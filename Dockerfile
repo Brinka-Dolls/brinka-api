@@ -5,7 +5,8 @@ COPY gradle ./gradle
 COPY gradlew ./
 RUN chmod +x gradlew
 COPY src ./src
-RUN ./gradlew clean build -x test --no-daemon
+# Lint e testes rodam no CI; a imagem so precisa do jar
+RUN ./gradlew clean bootJar --no-daemon
 
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
