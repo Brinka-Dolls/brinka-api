@@ -11,23 +11,26 @@ import org.brinka.brinkaapi.domain.repository.ProductRepository;
 @UseCase
 @RequiredArgsConstructor
 public class AddProductUseCase {
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+  private final ProductRepository productRepository;
+  private final CategoryRepository categoryRepository;
 
-    public Product execute(AddProductUseCaseInput input) {
-        var category = categoryRepository.findById(input.categoriaId())
-                .orElseThrow(() -> new CategoryNotFoundException(input.categoriaId()));
+  public Product execute(AddProductUseCaseInput input) {
+    var category =
+        categoryRepository
+            .findById(input.categoriaId())
+            .orElseThrow(() -> new CategoryNotFoundException(input.categoriaId()));
 
-        var product = Product.builder()
-                .id(null)
-                .imagem(input.imagem())
-                .nome(input.nome())
-                .categoria(category)
-                .descricao(input.descricao())
-                .preco(input.preco())
-                .estoque(input.estoque())
-                .build();
+    var product =
+        Product.builder()
+            .id(null)
+            .imagem(input.imagem())
+            .nome(input.nome())
+            .categoria(category)
+            .descricao(input.descricao())
+            .preco(input.preco())
+            .estoque(input.estoque())
+            .build();
 
-        return productRepository.saveProduct(product);
-    }
+    return productRepository.saveProduct(product);
+  }
 }

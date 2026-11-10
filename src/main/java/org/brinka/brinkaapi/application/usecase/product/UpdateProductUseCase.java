@@ -12,30 +12,33 @@ import org.brinka.brinkaapi.domain.repository.ProductRepository;
 @UseCase
 @RequiredArgsConstructor
 public class UpdateProductUseCase {
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+  private final ProductRepository productRepository;
+  private final CategoryRepository categoryRepository;
 
-    public Product execute(UpdateProductUseCaseInput input) {
-        var oldProduct = productRepository.findProductById(input.id())
-                .orElseThrow(() -> new ProductNotFoundException(input.id()));
+  public Product execute(UpdateProductUseCaseInput input) {
+    var oldProduct =
+        productRepository
+            .findProductById(input.id())
+            .orElseThrow(() -> new ProductNotFoundException(input.id()));
 
-        var category = input.categoriaId() == null ?
-                oldProduct.getCategoria() :
-                categoryRepository.findById(input.categoriaId())
-                        .orElseThrow(() -> new CategoryNotFoundException(input.categoriaId()));
+    var category =
+        input.categoriaId() == null
+            ? oldProduct.getCategoria()
+            : categoryRepository
+                .findById(input.categoriaId())
+                .orElseThrow(() -> new CategoryNotFoundException(input.categoriaId()));
 
-        var newProduct = Product.builder()
-                .id(oldProduct.getId())
-                .imagem(input.imagem() == null ? oldProduct.getImagem() : input.imagem())
-                .nome(input.nome() == null ? oldProduct.getNome() : input.nome())
-                .categoria(category)
-                .descricao(input.descricao() == null ? oldProduct.getDescricao() : input.descricao())
-                .preco(input.preco() == null ? oldProduct.getPreco() : input.preco())
-                .estoque(input.estoque() == null ? oldProduct.getEstoque() : input.estoque())
-                .build();
+    var newProduct =
+        Product.builder()
+            .id(oldProduct.getId())
+            .imagem(input.imagem() == null ? oldProduct.getImagem() : input.imagem())
+            .nome(input.nome() == null ? oldProduct.getNome() : input.nome())
+            .categoria(category)
+            .descricao(input.descricao() == null ? oldProduct.getDescricao() : input.descricao())
+            .preco(input.preco() == null ? oldProduct.getPreco() : input.preco())
+            .estoque(input.estoque() == null ? oldProduct.getEstoque() : input.estoque())
+            .build();
 
-        return oldProduct.equals(newProduct) ?
-                oldProduct :
-                productRepository.saveProduct(newProduct);
-    }
+    return oldProduct.equals(newProduct) ? oldProduct : productRepository.saveProduct(newProduct);
+  }
 }

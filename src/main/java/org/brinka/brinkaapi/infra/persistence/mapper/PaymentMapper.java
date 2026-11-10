@@ -5,10 +5,12 @@ import org.brinka.brinkaapi.infra.persistence.entity.PaymentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {PaymentTypeMapper.class, PaymentStatusMapper.class})
+@Mapper(
+    componentModel = "spring",
+    uses = {PaymentTypeMapper.class, PaymentStatusMapper.class})
 public interface PaymentMapper {
-    Payment toDomain(PaymentEntity entity);
+  Payment toDomain(PaymentEntity entity);
 
-    @Mapping(target = "pedido", ignore = true)
-    PaymentEntity toEntity(Payment domain);
+  @Mapping(target = "pedido", ignore = true)
+  PaymentEntity toEntity(Payment domain);
 }

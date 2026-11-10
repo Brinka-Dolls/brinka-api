@@ -11,14 +11,14 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class GetOrderByIdUseCase {
-    private final OrderRepository orderRepository;
-    private final UserRepository userRepository;
+  private final OrderRepository orderRepository;
+  private final UserRepository userRepository;
 
-    public Order execute(Integer id, String email) {
-        var user = userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
+  public Order execute(Integer id, String email) {
+    var user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        return orderRepository.findByIdAndUser(id, user)
-                .orElseThrow(() -> new OrderNotFoundException(id));
-    }
+    return orderRepository
+        .findByIdAndUser(id, user)
+        .orElseThrow(() -> new OrderNotFoundException(id));
+  }
 }

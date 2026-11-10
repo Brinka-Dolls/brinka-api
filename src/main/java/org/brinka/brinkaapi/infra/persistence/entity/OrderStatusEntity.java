@@ -13,8 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "tbl_status_pedido")
 public class OrderStatusEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String descricao;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+
+  private String descricao;
 }

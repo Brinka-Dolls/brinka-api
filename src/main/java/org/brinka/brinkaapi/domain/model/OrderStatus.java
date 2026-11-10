@@ -2,10 +2,10 @@ package org.brinka.brinkaapi.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +14,6 @@ import lombok.EqualsAndHashCode;
 @Setter
 @Builder
 public class OrderStatus {
-    private Integer id;
-    private String descricao;
+  private Integer id;
+  private String descricao;
 }

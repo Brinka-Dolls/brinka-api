@@ -1,11 +1,11 @@
 package org.brinka.brinkaapi.domain.repository;
 
+import java.util.Optional;
 import org.brinka.brinkaapi.domain.model.Card;
 import org.brinka.brinkaapi.domain.model.User;
 
-import java.util.Optional;
-
 public interface CardRepository {
-    Card saveCard(Card card);
-    Optional<Card> findCardByUser(User user);
+  Card saveCard(Card card);
+
+  Optional<Card> findCardByUser(User user);
 }

@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PaymentTypeMapper {
-    PaymentType toDomain(PaymentTypeEntity entity);
-    PaymentTypeEntity toEntity(PaymentType domain);
+  PaymentType toDomain(PaymentTypeEntity entity);
+
+  PaymentTypeEntity toEntity(PaymentType domain);
 }

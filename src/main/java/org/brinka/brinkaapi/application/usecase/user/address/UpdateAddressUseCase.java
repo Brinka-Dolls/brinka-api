@@ -12,31 +12,26 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class UpdateAddressUseCase {
-    private final AddressRepository repository;
-    private final UserRepository userRepository;
+  private final AddressRepository repository;
+  private final UserRepository userRepository;
 
-    public Address execute(AddressInput input, String email) {
-        var user = userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
+  public Address execute(AddressInput input, String email) {
+    var user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        var address = repository.findAddressByUser(user)
-                .orElseThrow(() -> new AddressNotFoundException(user.getEmail()));
+    var address =
+        repository
+            .findAddressByUser(user)
+            .orElseThrow(() -> new AddressNotFoundException(user.getEmail()));
 
-        if (input.cep() != null)
-            address.setCep(input.cep());
-        if (input.cidade() != null)
-            address.setCidade(input.cidade());
-        if (input.complemento() != null)
-            address.setComplemento(input.complemento());
-        if (input.estado() != null)
-            address.setEstado(input.estado());
-        if (input.numero() != null)
-            address.setNumero(input.numero());
-        if (input.rua() != null)
-            address.setRua(input.rua());
+    if (input.cep() != null) address.setCep(input.cep());
+    if (input.cidade() != null) address.setCidade(input.cidade());
+    if (input.complemento() != null) address.setComplemento(input.complemento());
+    if (input.estado() != null) address.setEstado(input.estado());
+    if (input.numero() != null) address.setNumero(input.numero());
+    if (input.rua() != null) address.setRua(input.rua());
 
-        address.setIdUsuario(user.getId());
+    address.setIdUsuario(user.getId());
 
-        return repository.save(address);
-    }
+    return repository.save(address);
+  }
 }

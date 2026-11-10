@@ -1,17 +1,23 @@
 package org.brinka.brinkaapi.domain.repository;
 
-import org.brinka.brinkaapi.domain.model.Product;
-
 import java.util.List;
 import java.util.Optional;
+import org.brinka.brinkaapi.domain.model.Product;
 
 public interface ProductRepository {
-    Product saveProduct(Product product);
-    List<Product> saveProducts(List<Product> product);
-    List<Product> findProducts();
-    Optional<Product> findProductById(Integer id);
-    Optional<Product> findProductByIdWithAvaliacoes(Integer id);
-    List<Product> findProductsById(List<Integer> id);
-    void deleteProductsById(List<Integer> ids);
-    void deleteProductById(Integer id);
+  Product saveProduct(Product product);
+
+  List<Product> saveProducts(List<Product> product);
+
+  List<Product> findProducts();
+
+  Optional<Product> findProductById(Integer id);
+
+  Optional<Product> findProductByIdWithAvaliacoes(Integer id);
+
+  List<Product> findProductsById(List<Integer> id);
+
+  void deleteProductsById(List<Integer> ids);
+
+  void deleteProductById(Integer id);
 }

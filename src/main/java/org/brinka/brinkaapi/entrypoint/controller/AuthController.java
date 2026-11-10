@@ -19,19 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthorizeLoginUseCase authorizeLoginUseCase;
-    private final SignUpUseCase signUpUseCase;
-    private final RequestMapper requestMapper;
+  private final AuthorizeLoginUseCase authorizeLoginUseCase;
+  private final SignUpUseCase signUpUseCase;
+  private final RequestMapper requestMapper;
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
-        var token = authorizeLoginUseCase.execute(loginRequest.email(), loginRequest.senha());
-        return ResponseEntity.ok().body(new AuthResponse(token));
-    }
+  @PostMapping("/login")
+  public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+    var token = authorizeLoginUseCase.execute(loginRequest.email(), loginRequest.senha());
+    return ResponseEntity.ok().body(new AuthResponse(token));
+  }
 
-    @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
-        var token = signUpUseCase.execute(requestMapper.toInput(signUpRequest));
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token));
-    }
+  @PostMapping("/signup")
+  public ResponseEntity<AuthResponse> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
+    var token = signUpUseCase.execute(requestMapper.toInput(signUpRequest));
+    return ResponseEntity.status(HttpStatus.CREATED).body(new AuthResponse(token));
+  }
 }

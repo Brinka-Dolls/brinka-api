@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface CardMapper {
-    Card toDomain(CardEntity entity);
-    CardEntity toEntity(Card domain);
+  Card toDomain(CardEntity entity);
+
+  CardEntity toEntity(Card domain);
 }

@@ -5,13 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(
-        basePackages = "org.brinka.brinkaapi.infra.persistence.repository"
-)
+@EnableJpaRepositories(basePackages = "org.brinka.brinkaapi.infra.persistence.repository")
 public class BrinkaApiApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(BrinkaApiApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(BrinkaApiApplication.class, args);
+  }
 }

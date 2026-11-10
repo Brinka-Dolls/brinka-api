@@ -1,59 +1,61 @@
 package org.brinka.brinkaapi.entrypoint.mapper;
 
+import java.util.List;
 import org.brinka.brinkaapi.application.dto.output.CartItemOutput;
 import org.brinka.brinkaapi.application.dto.output.CartOutput;
-import org.brinka.brinkaapi.domain.model.Card;
 import org.brinka.brinkaapi.domain.model.Address;
+import org.brinka.brinkaapi.domain.model.Card;
 import org.brinka.brinkaapi.domain.model.Order;
 import org.brinka.brinkaapi.domain.model.OrderItem;
 import org.brinka.brinkaapi.domain.model.Payment;
 import org.brinka.brinkaapi.domain.model.Product;
 import org.brinka.brinkaapi.domain.model.Review;
 import org.brinka.brinkaapi.domain.model.User;
-import org.brinka.brinkaapi.entrypoint.dto.response.CardResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.*;
 import org.brinka.brinkaapi.entrypoint.dto.response.AddressResponse;
+import org.brinka.brinkaapi.entrypoint.dto.response.CardResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.CartResponse;
 import org.brinka.brinkaapi.entrypoint.dto.response.ProductResponse;
-import org.brinka.brinkaapi.entrypoint.dto.response.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface ResponseMapper {
-    // Card Responses
-    CardResponse toResponse(Card domain);
+  // Card Responses
+  CardResponse toResponse(Card domain);
 
-    // Product Responses
-    @Mapping(source = "categoria.descricao", target = "categoria")
-    ProductResponse toResponse(Product product);
-    List<ProductResponse> toResponseList(List<Product> products);
+  // Product Responses
+  @Mapping(source = "categoria.descricao", target = "categoria")
+  ProductResponse toResponse(Product product);
 
-    @Mapping(source = "usuario.nome", target = "usuario")
-    ReviewResponse toResponse(Review review);
+  List<ProductResponse> toResponseList(List<Product> products);
 
-    // Address Responses
-    AddressResponse toResponse(Address domain);
+  @Mapping(source = "usuario.nome", target = "usuario")
+  ReviewResponse toResponse(Review review);
 
-    // Cart Responses
-    CartResponse toResponse(CartOutput domain);
-    CartItemResponse toResponse(CartItemOutput output);
+  // Address Responses
+  AddressResponse toResponse(Address domain);
 
-    // Order Responses
-    @Mapping(source = "status.descricao", target = "status")
-    OrderResponse toResponse(Order order);
-    List<OrderResponse> toOrderResponseList(List<Order> orders);
+  // Cart Responses
+  CartResponse toResponse(CartOutput domain);
 
-    @Mapping(source = "produto.id", target = "productId")
-    @Mapping(source = "produto.nome", target = "nome")
-    @Mapping(source = "produto.imagem", target = "imagem")
-    OrderItemResponse toResponse(OrderItem item);
+  CartItemResponse toResponse(CartItemOutput output);
 
-    @Mapping(source = "tipo.descricao", target = "tipo")
-    @Mapping(source = "status.descricao", target = "status")
-    OrderPaymentResponse toResponse(Payment payment);
+  // Order Responses
+  @Mapping(source = "status.descricao", target = "status")
+  OrderResponse toResponse(Order order);
 
-    // User Responses
-    UserResponse toResponse(User user);
+  List<OrderResponse> toOrderResponseList(List<Order> orders);
+
+  @Mapping(source = "produto.id", target = "productId")
+  @Mapping(source = "produto.nome", target = "nome")
+  @Mapping(source = "produto.imagem", target = "imagem")
+  OrderItemResponse toResponse(OrderItem item);
+
+  @Mapping(source = "tipo.descricao", target = "tipo")
+  @Mapping(source = "status.descricao", target = "status")
+  OrderPaymentResponse toResponse(Payment payment);
+
+  // User Responses
+  UserResponse toResponse(User user);
 }

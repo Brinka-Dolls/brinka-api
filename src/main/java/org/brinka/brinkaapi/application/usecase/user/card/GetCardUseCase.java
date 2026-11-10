@@ -11,13 +11,13 @@ import org.brinka.brinkaapi.domain.repository.UserRepository;
 @UseCase
 @RequiredArgsConstructor
 public class GetCardUseCase {
-    private final CardRepository repository;
-    private final UserRepository userRepository;
+  private final CardRepository repository;
+  private final UserRepository userRepository;
 
-    public Card execute(String email) {
-        var user = userRepository.findUserByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
-        return repository.findCardByUser(user)
-                .orElseThrow(() -> new CardNotFoundException(user.getEmail()));
-    }
+  public Card execute(String email) {
+    var user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+    return repository
+        .findCardByUser(user)
+        .orElseThrow(() -> new CardNotFoundException(user.getEmail()));
+  }
 }

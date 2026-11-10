@@ -1,13 +1,12 @@
 package org.brinka.brinkaapi.infra.persistence.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,24 +15,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "tbl_pagamento")
 public class PaymentEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_pedido", nullable = false, unique = true)
-    private OrderEntity pedido;
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "id_pedido", nullable = false, unique = true)
+  private OrderEntity pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo")
-    private PaymentTypeEntity tipo;
+  @ManyToOne
+  @JoinColumn(name = "id_tipo")
+  private PaymentTypeEntity tipo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_status")
-    private PaymentStatusEntity status;
+  @ManyToOne
+  @JoinColumn(name = "id_status")
+  private PaymentStatusEntity status;
 
-    private BigDecimal valor;
+  private BigDecimal valor;
 
-    @Column(name = "data_pagamento")
-    private LocalDateTime dataPagamento;
+  @Column(name = "data_pagamento")
+  private LocalDateTime dataPagamento;
 }

@@ -8,10 +8,8 @@ import org.springframework.core.env.Environment;
 @Configuration(proxyBeanMethods = false)
 public class DatabaseBootstrapConfiguration {
 
-    @Bean
-    public static BeanPostProcessor databaseBootstrapPostProcessor(
-            Environment environment
-    ) {
-        return new DatabaseBootstrapPostProcessor(environment);
-    }
+  @Bean
+  public static BeanPostProcessor databaseBootstrapPostProcessor(Environment environment) {
+    return new DatabaseBootstrapPostProcessor(environment);
+  }
 }

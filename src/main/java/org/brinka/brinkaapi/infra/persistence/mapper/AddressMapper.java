@@ -9,16 +9,17 @@ import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface AddressMapper {
-    @Mapping(target = "usuario", source = "idUsuario", qualifiedByName = "idToUserEntityId")
-    AddressEntity toEntity(Address domain);
-    @Mapping(target = "idUsuario", source = "usuario.id")
-    Address toDomain(AddressEntity entity);
+  @Mapping(target = "usuario", source = "idUsuario", qualifiedByName = "idToUserEntityId")
+  AddressEntity toEntity(Address domain);
 
-    @Named("idToUserEntityId")
-    default UserEntity idToUserEntityId(Integer idUsuario) {
-        if (idUsuario == null) return null;
-        UserEntity ref = new UserEntity();
-        ref.setId(idUsuario);
-        return ref;
-    }
+  @Mapping(target = "idUsuario", source = "usuario.id")
+  Address toDomain(AddressEntity entity);
+
+  @Named("idToUserEntityId")
+  default UserEntity idToUserEntityId(Integer idUsuario) {
+    if (idUsuario == null) return null;
+    UserEntity ref = new UserEntity();
+    ref.setId(idUsuario);
+    return ref;
+  }
 }

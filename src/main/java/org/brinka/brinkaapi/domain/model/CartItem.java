@@ -2,10 +2,10 @@ package org.brinka.brinkaapi.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,15 +15,14 @@ import lombok.EqualsAndHashCode;
 @Builder
 public class CartItem {
 
-    private Integer productId;
-    private Integer quantity;
+  private Integer productId;
+  private Integer quantity;
 
-    public void increment() {
-        this.quantity++;
-    }
+  public void increment() {
+    this.quantity++;
+  }
 
-    public void decrement() {
-        this.quantity--;
-    }
-
+  public void decrement() {
+    this.quantity--;
+  }
 }
