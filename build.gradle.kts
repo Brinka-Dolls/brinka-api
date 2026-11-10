@@ -52,7 +52,7 @@ tasks.named("jar") {
 spotless {
     java {
         target("src/**/*.java")
-        googleJavaFormat()
+        googleJavaFormat("1.28.0")
         removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
