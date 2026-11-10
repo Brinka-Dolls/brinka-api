@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   build:
@@ -30,3 +30,19 @@ jobs:
 
       - name: Test
         run: ./gradlew test
+
+  deploy:
+    # CD: so apos o CI passar, e apenas em push na main (nunca em PRs)
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_HOOK: ${{ secrets.RENDER_HOOK }}
+        run: |
+          if [ -z "$RENDER_HOOK" ]; then
+            echo "RENDER_HOOK secret is not set" >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST "$RENDER_HOOK"
